@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Profile;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.TransientDataAccessResourceException;
 import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -79,6 +80,6 @@ public class AuthorDaoIntegrationTest {
 
         authorDao.deleteAuthorById(savedEntity.getId());
 
-        assertThrows(EmptyResultDataAccessException.class, () -> authorDao.getById(savedEntity.getId()));
+        assertThrows(TransientDataAccessResourceException.class, () -> authorDao.getById(savedEntity.getId()));
     }
 }

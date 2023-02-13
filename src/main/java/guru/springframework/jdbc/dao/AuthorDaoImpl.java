@@ -14,7 +14,11 @@ public class AuthorDaoImpl implements AuthorDao {
 
     @Override
     public Author getById(Long id) {
-        return jdbcTemplate.queryForObject("SELECT * FROM author WHERE id=?", getRowMapper(), id);
+        String sql = "SELECT author.*, book.id AS book_id, book.title, book.isbn, book.publisher FROM author" +
+                " LEFT JOIN book ON book.author_id = author.id" +
+                " WHERE author.id=?";
+
+        return jdbcTemplate.query(sql, new AuthorExtractor(), id);
     }
 
     @Override
