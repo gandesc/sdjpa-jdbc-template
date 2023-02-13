@@ -61,7 +61,7 @@ public class AuthorDaoIntegrationTest {
 
         Author updatedEntity = authorDao.updateAuthor(savedEntity);
 
-        assertThat(updatedEntity.getLastName()).isEqualTo(savedEntity.getFirstName());
+        assertThat(updatedEntity.getLastName()).isEqualTo(savedEntity.getLastName());
     }
 
     @Test
